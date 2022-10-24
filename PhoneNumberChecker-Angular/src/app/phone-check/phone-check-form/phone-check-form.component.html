@@ -1,0 +1,26 @@
+<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+    <!-- Country dropdown List-->
+    <div class="mb-3 col-8 form-group ">
+        <label for="countryList">Country</label>
+           <select class="form-select" name="country" #country="ngModel" [(ngModel)]="service.countryId">
+            <option *ngFor="let country of service.countryList" [value]="country.id">{{country.name}}</option>
+          </select>
+    </div>
+
+    <!-- Phone Number Input-->
+    <div class="mb-3 col-8 form-group">
+        <label>Phone Number</label>
+        <input  class="form-control form-control-lg" 
+                placeholder="Phone Number" 
+                name="phoneNumber" 
+                #phoneNumber="ngModel" 
+                [(ngModel)]="service.phoneNumber"
+                required maxlength="20" minlength="1" 
+                [class.invalid]="phoneNumber.invalid && phoneNumber.touched">
+    </div>
+   
+    <!-- Form submit button-->
+    <div class="d-grid col-8 mx-auto">
+        <button id="button" class="btn btn-info btn-lg" type="submit" [disabled]="form.invalid || !this.service.countryId  ">Verify</button>
+    </div>
+</form>

@@ -1,0 +1,40 @@
+<div class="jumbotron py-3">
+    <h1 class="display-4 text-center">Phone Number Check</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <app-phone-check-form></app-phone-check-form>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col"> <h2>Result:</h2> </div>
+        </div>
+        <div class="result-container">
+            <div class="row">
+                <div class="col"> <h4>Is Valid:</h4> </div>
+                <div class="col" >{{service.validationResult.isValid}}</div>
+            </div>
+
+            <div class="row">
+                <div class="col"> <h4>Is Possible:</h4> </div>
+                <div class="col "> {{service.validationResult.isPossible}} </div>
+            </div>
+
+            <div class="row">
+                <div class="col"> <h4>Phone Type:</h4> </div>
+                <div class="col"> {{service.validationResult.phoneType}} </div>
+            </div>
+
+            <div class="row">
+                <div class="col"> <h4>International Format:</h4> </div>
+                <div class="col"> {{service.validationResult.internationalFormat}}</div>
+            </div>
+
+            <div class="d-grid col-8 mx-auto" >
+                <button id="button" class="btn btn-info btn-lg btn-block" (click)="onDownland()" [disabled]="this.service.validationResult.isValid != 'True'" >Download CSV</button>
+            </div>
+        </div>
+          
+    </div>
+</div>
