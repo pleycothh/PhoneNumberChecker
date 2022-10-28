@@ -6,7 +6,7 @@ Step 1: Set up the environment
 2. Clon this project to VS code
 3. Create two terminals in VS code for each folder under this repository
 
-Step 2: Backend Frontend
+Step 2: Run Backend
 1. Navigate to Asp.Net project  : ```cd .\PhoneNumberChecker.Api.App\PhoneNumberChecker.Api\```
 2. Run server                   : ```dotnet run```
 
