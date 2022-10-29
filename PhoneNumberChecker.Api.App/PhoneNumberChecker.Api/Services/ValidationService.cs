@@ -30,5 +30,10 @@ namespace PhoneNumberChecker.Api.Services
 
             return new ResultModel(isValid, isPossible, phoneType, internationalFormat);
         }
+
+        public void SaveResult(ResultModel resultModel)
+        {
+
+        }
     }
 }

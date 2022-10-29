@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using PhoneNumberChecker.Api.Data;
 using PhoneNumberChecker.Api.Services;
 using PhoneNumberChecker.Api.Services.Contracts;
 
@@ -5,6 +7,7 @@ namespace PhoneNumberChecker.Api
 {
     public class Program
     {
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -17,9 +20,16 @@ namespace PhoneNumberChecker.Api
             builder.Services.AddSingleton<ICountryService, CountryService>();
             builder.Services.AddSingleton<IDownloadService, DownloadService>();
             builder.Services.AddSingleton<IValidationService, ValidationService>();
-            
+
+            // myAllowSpecificOrigins
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddCors();
+
+            // DbContext
+            builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             var app = builder.Build();
 

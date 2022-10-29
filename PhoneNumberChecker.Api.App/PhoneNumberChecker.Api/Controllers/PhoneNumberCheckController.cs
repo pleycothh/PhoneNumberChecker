@@ -38,6 +38,10 @@ namespace PhoneNumberChecker.Api.Controllers
         public IActionResult GetPhoneNumber([FromRoute] int id , [FromRoute] string phoneNumber)
         {
             var result = _validationSerive.Validating(id, phoneNumber);
+
+            // record user search to database
+            _validationSerive.SaveResult(result);
+
             return Ok(result);
         }
 
@@ -48,6 +52,12 @@ namespace PhoneNumberChecker.Api.Controllers
         {
             var csvFile = _downloadService.DownloadCsv(result);
             return Ok(csvFile);
+        }
+
+        [HttpGet("history")]
+        public IActionResult GetHistory()
+        {
+            return Ok("History");
         }
 
     }

@@ -2,6 +2,8 @@
 {
     public class ResultModel
     {
+        public int Id { get; set; }
+        public CountryModel Country { get; set; } = new CountryModel(1, "demo");
         public string IsValid { get; set; }
         public string IsPossible { get; set; }
         public string PhoneType { get; set; }
