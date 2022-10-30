@@ -17,9 +17,9 @@ namespace PhoneNumberChecker.Api
             builder.Services.AddControllers();
 
             // Inject service
-            builder.Services.AddSingleton<ICountryService, CountryService>();
-            builder.Services.AddSingleton<IDownloadService, DownloadService>();
-            builder.Services.AddSingleton<IValidationService, ValidationService>();
+            builder.Services.AddScoped<ICountryService, CountryService>();
+            builder.Services.AddScoped<IDownloadService, DownloadService>();
+            builder.Services.AddScoped<IValidationService, ValidationService>();
 
             // myAllowSpecificOrigins
             builder.Services.AddEndpointsApiExplorer();

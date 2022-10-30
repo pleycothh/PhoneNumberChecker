@@ -2,6 +2,7 @@
 using PhoneNumberChecker.Api.Data;
 using PhoneNumberChecker.Api.Models;
 using PhoneNumberChecker.Api.Services.Contracts;
+using System.Runtime.CompilerServices;
 
 namespace PhoneNumberChecker.Api.Services
 {
@@ -25,15 +26,15 @@ namespace PhoneNumberChecker.Api.Services
 
         private void InitCountry()
         {
-            var countries = _context.Countries.Find();
+            var countries =  _context.Countries.Find(2);
             if (countries is null)
             {
-                _context.Countries.Add(new CountryModel(0, "Australia"));
-                _context.Countries.Add(new CountryModel(1, "Canada"));
-                _context.Countries.Add(new CountryModel(2, "China"));
-                _context.Countries.Add(new CountryModel(3, "United States"));
+                _context.Countries.Add(new CountryModel() { Name= "Australia" });
+                _context.Countries.Add(new CountryModel() { Name= "Canada" });
+                _context.Countries.Add(new CountryModel() { Name= "China" });
+                _context.Countries.Add(new CountryModel() { Name= "United States" });
 
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
 
                 Console.WriteLine("Four countries has initialized");
             }

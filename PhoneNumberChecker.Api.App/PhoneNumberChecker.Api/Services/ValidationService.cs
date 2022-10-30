@@ -18,7 +18,7 @@ namespace PhoneNumberChecker.Api.Services
         public ResultModel Validating(int id, string phoneNumber)
         {
             // if input value is not number, return invalid
-            if(!int.TryParse(phoneNumber, out _)) return new ResultModel("False", "False", "Invalid Number", "Unknown");
+            if(!int.TryParse(phoneNumber, out _)) return new ResultModel() { IsPossible= "False", IsValid = "False", PhoneType = "Invalid Number", InternationalFormat = "Unknown" };
 
             // else: do validation
             var region = CountryModel.Region[id];
@@ -35,7 +35,7 @@ namespace PhoneNumberChecker.Api.Services
             var regionCode = phoneNumberUtil.GetCountryCodeForRegion(region);
             var internationalFormat = $"+{regionCode} {phoneNumber}";
 
-            var result = new ResultModel(isValid, isPossible, phoneType, internationalFormat);
+            var result = new ResultModel() { IsPossible = isPossible, IsValid = isValid, PhoneType = phoneType, InternationalFormat = internationalFormat };
 
             return result;
         }

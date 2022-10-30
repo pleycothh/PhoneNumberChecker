@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using PhoneNumberChecker.Api.Models;
-using PhoneNumberChecker.Api.Services;
 using PhoneNumberChecker.Api.Services.Contracts;
-using PhoneNumbers;
-using System.Diagnostics.Metrics;
 
 namespace PhoneNumberChecker.Api.Controllers
 {
