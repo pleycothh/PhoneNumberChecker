@@ -26,21 +26,21 @@ namespace PhoneNumberChecker.Api.Controllers
         // Get ContryList
         //  /api/api/number-check
         [HttpGet]
-        public IActionResult GetCountries()
+        public async Task<IActionResult> GetCountries()
         {
-            var country =  _countryService.GetCountry();
+            var country =  await _countryService.GetCountry();
            return Ok(country);
         }
 
         // send post request to get valid
         //  /api/number-checker/valid?countryId=1,phoneNum=0505100100
         [HttpGet("{id}/{phoneNumber}")]
-        public IActionResult GetPhoneNumber([FromRoute] int id , [FromRoute] string phoneNumber)
+        public async Task<IActionResult> GetPhoneNumber([FromRoute] int id , [FromRoute] string phoneNumber)
         {
             var result = _validationSerive.Validating(id, phoneNumber);
 
             // record user search to database
-            _validationSerive.SaveResult(result);
+            await _validationSerive.SaveResult(result);
 
             return Ok(result);
         }

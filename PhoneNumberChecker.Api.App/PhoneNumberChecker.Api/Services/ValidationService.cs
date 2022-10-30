@@ -1,4 +1,5 @@
-﻿using PhoneNumberChecker.Api.Models;
+﻿using PhoneNumberChecker.Api.Data;
+using PhoneNumberChecker.Api.Models;
 using PhoneNumberChecker.Api.Services.Contracts;
 
 
@@ -6,7 +7,12 @@ namespace PhoneNumberChecker.Api.Services
 {
     public class ValidationService : IValidationService
     {
-        
+        private readonly DataContext _context;
+
+        public ValidationService(DataContext context)
+        {
+            _context = context;
+        }
        
         public ResultModel Validating(int id, string phoneNumber)
         {
@@ -28,11 +34,15 @@ namespace PhoneNumberChecker.Api.Services
             var regionCode = phoneNumberUtil.GetCountryCodeForRegion(region);
             var internationalFormat = $"+{regionCode} {phoneNumber}";
 
-            return new ResultModel(isValid, isPossible, phoneType, internationalFormat);
+            var result = new ResultModel(isValid, isPossible, phoneType, internationalFormat);
+
+            return result;
         }
 
-        public void SaveResult(ResultModel resultModel)
+        public async Task SaveResult(ResultModel resultModel)
         {
+            _context.Results.Add(resultModel);
+            await _context.SaveChangesAsync();
 
         }
     }
