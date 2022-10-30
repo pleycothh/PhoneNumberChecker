@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using PhoneNumberChecker.Api.Models;
 using PhoneNumberChecker.Api.Services;
 using PhoneNumberChecker.Api.Services.Contracts;
@@ -54,10 +55,38 @@ namespace PhoneNumberChecker.Api.Controllers
             return Ok(csvFile);
         }
 
-        [HttpGet("history")]
-        public IActionResult GetHistory()
+        // dowload from database, selected by id
+        //  /api/number-checke/download
+        [HttpPost("download/{id}")]
+        public async Task<IActionResult> GetDownload([FromRoute] int id)
         {
-            return Ok("History");
+            var csvFile = await _downloadService.DownloadCsv(id);
+
+            if(csvFile == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(csvFile);
+        }
+
+
+        // get list of result model from database
+        [HttpGet("history")]
+        public async Task<IActionResult> GetHistory()
+        {
+            var results = await _validationSerive.GetResults();
+            return Ok(results);
+        }
+
+        // get list of result model from database
+        [HttpDelete("history/{id}")]
+        public async Task<IActionResult> DeleteHistory([FromRoute] int id)
+        {
+            var result = await _validationSerive.DeleteResult(id);
+
+            if (result == -1) return NotFound();
+            return Ok(result);
         }
 
     }

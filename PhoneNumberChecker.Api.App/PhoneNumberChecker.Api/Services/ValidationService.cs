@@ -1,4 +1,5 @@
-﻿using PhoneNumberChecker.Api.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PhoneNumberChecker.Api.Data;
 using PhoneNumberChecker.Api.Models;
 using PhoneNumberChecker.Api.Services.Contracts;
 
@@ -44,6 +45,25 @@ namespace PhoneNumberChecker.Api.Services
             _context.Results.Add(resultModel);
             await _context.SaveChangesAsync();
 
+        }
+
+        public async Task<IEnumerable<ResultModel>> GetResults()
+        {
+            return await _context.Results.ToListAsync();
+        }
+
+        public async Task<int> DeleteResult(int id)
+        {
+           //  await _context.Results.ToListAsync();
+            var result = await _context.Results.FindAsync(id);
+            if (result == null)
+            {
+                return -1;
+            }
+
+            _context.Results.Remove(result);
+            await _context.SaveChangesAsync();
+            return result.Id;
         }
     }
 }
