@@ -11,7 +11,7 @@ using PhoneNumberChecker.Api.Data;
 namespace PhoneNumberChecker.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221029001757_InitialCreate")]
+    [Migration("20221030061803_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
