@@ -17,7 +17,10 @@ Step 3: Run frontend
 ## Stack:
 Frontend: Angular
 Backend: Asp.Net 6 Web Api
+Database: EF SQL server 18
 
 ## Features:
 1. Verify the phone number to check if is valid using Nuget package (libphonenumber-csharp).
-2. Download the CSV result.
+2. Store verify results in the database and display them as history.
+3. Download the current CSV result.
+4. Download the CSV result from the history list.
