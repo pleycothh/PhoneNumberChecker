@@ -26,8 +26,7 @@ namespace PhoneNumberChecker.Api.Services
 
         private void InitCountry()
         {
-            var countries =  _context.Countries.Any();
-            if (!countries)
+            if (!_context.Countries.Any())
             {
                 _context.Countries.Add(new CountryModel() { Name= "Australia" });
                 _context.Countries.Add(new CountryModel() { Name= "Canada" });
